@@ -74,27 +74,8 @@ while True:
     else:  # SM==1のとき
         #        i = 0
         print("sleep mode")
-        sleep_ms = xb.sleep_now(30000, True)
-        print("sleepおわり！！")
-        
-'''
-        t = time.time()
-        while True:
-            to = time.time()
-            received_msg = xbee.receive()
-            if received_msg:
-                payload = received_msg['payload']
-                if str(payload.decode()) == 'wakeUp':
-                    print("wakeUp")
-                    try:
-                        xbee.transmit(TARGET_64BIT_ADDR, srl + "wakeUp")
-                        print("Data sent successfully")
-                    except Exception as e:
-                        print("Transmit failure:", str(e))
-                    SM = 0
-                    break
-            if (to - t) >= 5:
-                break
-'''
+        sleep_ms = xb.sleep_now(8000, True)
+        print("sleep finished")
+        SM = 0
 
     time.sleep(1)
