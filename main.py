@@ -3,9 +3,12 @@ from machine import Pin
 import time
 
 TARGET_64BIT_ADDR = b'\x00\x13\xA2\x00\x41\xCC\x62\xE4'
-#TARGET_64BIT_ADDR = b'\x00\x13\xA2\x00\x41\xCB\xF8\xAC'
-
-srl = '001'
+R501_addr = b'\x00\x13\xA2\x00\x41\xCC\x62\xE4'
+#R401_addr =
+#R301_addr =
+#R201_addr =
+#R101_addr =
+cood_ADDR = b'\x00\x13\xA2\x00\x41\xCB\xF8\xAC'
 
 MESSAGE_MOTION = "mdt" #Motion detection
 MESSAGE_NO_MOTION = "ucd" #Unchanged
@@ -25,22 +28,24 @@ xb = xbee.XBee()
 
 input_pin = Pin(INPUT_PIN_ID, Pin.IN, Pin.PULL_UP)
 
+NI = str(xbee.atcmd("NI"))
+if NI == '501':
+    TARGET_64BIT_ADDR =R501_addr
+
 while True:
     if SM == 0:
         if input_pin.value() == 0 and input_pin.value() != before_state:
 #           print("Sending data to %s >> %s" % (''.join('{:02x}'.format(x).upper() for x in TARGET_64BIT_ADDR),
 #                                                MESSAGE_NO_MOTION))
             try:
-                xbee.transmit(TARGET_64BIT_ADDR, srl + MESSAGE_NO_MOTION)
+                xbee.transmit(TARGET_64BIT_ADDR, NI + MESSAGE_NO_MOTION)
                 print("Data sent successfully")
             except Exception as e:
                 print("Transmit failure:", str(e))
 
         elif input_pin.value() == 1 and input_pin.value() != before_state:
-#            print("Sending data to %s >> %s" % (''.join('{:02x}'.format(x).upper() for x in TARGET_64BIT_ADDR),
-#                                               MESSAGE_MOTION))
             try:
-                xbee.transmit(TARGET_64BIT_ADDR, srl + MESSAGE_MOTION)
+                xbee.transmit(TARGET_64BIT_ADDR, NI + MESSAGE_MOTION)
                 print("Data sent successfully")
             except Exception as e:
                 print("Transmit failure:", str(e))
@@ -57,16 +62,16 @@ while True:
             if str(payload.decode()) == 'sleep':
                 print("sleeping")
                 SM = 1
-            elif str(payload.decode()) == srl + MESSAGE_NO_MOTION:
+            elif str(payload.decode()) == NI + MESSAGE_NO_MOTION:
                 print("Unchanged")
                 before_state = 0
-            elif str(payload.decode()) == srl + MESSAGE_MOTION:
+            elif str(payload.decode()) == NI + MESSAGE_MOTION:
                 print("Motion detection")
                 before_state = 1
             elif str(payload.decode()) == "wakeUp":
                 print("wake up res")
                 try:
-                    xbee.transmit(TARGET_64BIT_ADDR,srl + "wakeUp")
+                    xbee.transmit(TARGET_64BIT_ADDR,NI + "wakeUp")
                     print("Data sent successfully")
                 except Exception as e:
                     print("Transmit failure:", str(e))
