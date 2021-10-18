@@ -73,7 +73,8 @@ while True:
             elif str(payload.decode()) == "wakeUp":
                 print("wake up res")
                 try:
-                    xbee.transmit(TARGET_64BIT_ADDR,NI + "wakeUp")
+#                    xbee.transmit(TARGET_64BIT_ADDR,NI + "wakeUp")
+                    xbee.transmit(TARGET_64BIT_ADDR,"wakeUp")
                     print("Data sent successfully")
                 except Exception as e:
                     print("Transmit failure:", str(e))
