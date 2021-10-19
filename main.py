@@ -2,8 +2,7 @@ import xbee
 from machine import Pin
 import time
 
-TARGET_64BIT_ADDR = b'\x00\x13\xA2\x00\x41\xCC\x62\xE4'
-S101_addr = b'\x00\x13\xA2\x00\x41\xCC\x0D\x58'
+S101_addr = b'\x00\x13\xA2\x00\x41\xB7\x9A\xB7'
 R501_addr = b'\x00\x13\xA2\x00\x41\xCC\x62\xE4'
 R401_addr = b'\x00\x13\xA2\x00\x41\xCC\x0D\x58'
 R301_addr = b'\x00\x13\xA2\x00\x41\xCD\x90\xE0'
@@ -73,8 +72,7 @@ while True:
             elif str(payload.decode()) == "wakeUp":
                 print("wake up res")
                 try:
-#                    xbee.transmit(TARGET_64BIT_ADDR,NI + "wakeUp")
-                    xbee.transmit(TARGET_64BIT_ADDR,"wakeUp")
+                    xbee.transmit(TARGET_64BIT_ADDR,NI + "wakeUp")
                     print("Data sent successfully")
                 except Exception as e:
                     print("Transmit failure:", str(e))
