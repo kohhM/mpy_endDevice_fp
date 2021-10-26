@@ -31,7 +31,7 @@ input_pin = Pin(INPUT_PIN_ID, Pin.IN, Pin.PULL_UP)
 
 NI = str(xbee.atcmd("NI"))
 if NI == '501':
-    TARGET_64BIT_ADDR =R501_addr
+    TARGET_64BIT_ADDR = R501_addr
 
 while True:
     if SM == 0:
