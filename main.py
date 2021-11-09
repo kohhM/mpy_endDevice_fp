@@ -32,7 +32,7 @@ xb = xbee.XBee()
 input_pin = Pin(INPUT_PIN_ID, Pin.IN, Pin.PULL_UP)
 
 NI = str(xbee.atcmd("NI"))
-if NI == 'R501':
+if NI == 'S101':
     TARGET_64BIT_ADDR = R501_addr
 else:
     TARGET_64BIT_ADDR = R501_addr
