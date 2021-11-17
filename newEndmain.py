@@ -12,6 +12,7 @@ MESSAGE_NO_MOTION = "ucd"
 INPUT_PIN_ID = "D1"
 
 CO_addr = b'\x00\x13\xA2\x00\x41\xC6\x25\x94'
+# コーディネータのアドレス．要変更
 
 SM = 0
 # 0で通常動作，1でスリープ
