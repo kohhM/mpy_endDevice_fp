@@ -49,6 +49,8 @@ while True:
                 print("Transmit failure:", str(e))
 
         elif input_pin.value() == 1 and input_pin.value() != before_state:
+            print("Sending data to %s >> %s" % (''.join('{:02x}'.format(x).upper() for x in TARGET_64BIT_ADDR),
+                                                MESSAGE_MOTION))
             try:
                 xbee.transmit(TARGET_64BIT_ADDR, NI + MESSAGE_MOTION)
                 print("Data sent successfully")
