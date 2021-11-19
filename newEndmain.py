@@ -52,7 +52,7 @@ while True:
 
     else:
         print("sleep mode")
-        sleep_ms = xb.sleep_now(800, True)
+        sleep_ms = xb.sleep_now(10000, True)
         print("sleep finished")
         SM = 0
 
