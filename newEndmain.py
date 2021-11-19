@@ -5,7 +5,7 @@ from machine import Pin
 
 INPUT_PIN_ID = "D1"
 
-CO_addr = b'\x00\x13\xA2\x00\x41\xC6\x25\x94'
+CO_addr = b'\x00\x13\xA2\x00\x41\xCB\xF8\xAC'
 # コーディネータのアドレス．要変更
 
 SM = 0
@@ -26,7 +26,7 @@ while True:
     if SM == 0:
         if input_pin.value() == 0 and input_pin.value() != before_state:
             try:
-                xbee.transmit(CO_addr, 'ucd')
+                xbee.transmit(CO_addr, NI+'ucd')
                 print("sent ucd")
                 before_state = 0
             except Exception as e:
@@ -35,7 +35,7 @@ while True:
 
         elif input_pin.value() == 1 and input_pin.value() != before_state:
             try:
-                xbee.transmit(CO_addr, 'mdt')
+                xbee.transmit(CO_addr, NI+'mdt')
                 print("sent mdt")
                 before_state = 1
             except Exception as e:
