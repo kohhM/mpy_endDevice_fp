@@ -11,11 +11,11 @@ print(" | New XBee test MP |")
 print(" +------------------+\n")
 
 input_pin = Pin(INPUT_PIN_ID, Pin.IN, Pin.PULL_UP)
-print("Sending data to %s >> %s" % (''.join('{:02x}'.format(x).upper() for x in CO_ADDR), str(input_pin.value())))
 
 while True:
     try:
         xbee.transmit(CO_ADDR, str(input_pin.value()))
+        print("Sending data to %s >> %s" % (''.join('{:02x}'.format(x).upper() for x in CO_ADDR), str(input_pin.value())))
         time.sleep(5)
     except Exception as e:
         print("えらー>>> %s", str(e))
