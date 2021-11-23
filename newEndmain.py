@@ -22,6 +22,8 @@ xb = xbee.XBee()
 
 input_pin = Pin(INPUT_PIN_ID, Pin.IN, Pin.PULL_UP)
 
+NI = str(xbee.atcmd("NI"))
+
 while True:
     if SM == 0:
         if input_pin.value() == 0 and input_pin.value() != before_state:
@@ -47,7 +49,6 @@ while True:
         if received_msg:
             payload = received_msg['payload']
             if str(payload.decode()) == 'sleep':
-                print("sleeping")
                 SM = 1
 
     else:
