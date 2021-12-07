@@ -1,7 +1,7 @@
 from machine import Pin
 import xbee
 
-INPUT_PIN_ID = "D1"
+INPUT_PIN_ID = "D8"
 
 CO_addr = b'\x00\x13\xA2\x00\x41\xCB\xF8\xAC'
 
@@ -16,9 +16,9 @@ input_pin = Pin(INPUT_PIN_ID, Pin.IN, Pin.PULL_UP)
 NI = str(xbee.atcmd("NI"))
 
 while True:
-    print("start sleeping")
-    sleep_ms = xb.sleep_now(None, True)
-    if xb.wake_rason() is xbee.PIN_WAKE:
+    sleep_ms = xb.sleep_now(True)
+    # sleep_ms = xb.sleep_now(None, True)
+    if xb.wake_reason() is xbee.PIN_WAKE:
         try:
             xbee.transmit(CO_addr, NI+"mdt")
             print("sent mdt")
