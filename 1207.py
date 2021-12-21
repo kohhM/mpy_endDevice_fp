@@ -12,7 +12,7 @@ print(" +-------------------------+\n")
 xb = xbee.XBee()
 
 input_pin = Pin(INPUT_PIN_ID, Pin.IN, Pin.PULL_UP)
-sw_sleep = Pin("D2", Pin.IN, Pin.PULL_UP)
+sw_sleep = Pin("D0", Pin.IN, Pin.PULL_UP)
 
 NI = str(xbee.atcmd("NI"))
 
